@@ -1,0 +1,34 @@
+{
+    "name": "C++ & Python Compiler Dev Environment",
+    // Use a pre-built image with C++ and core tools
+    "image": "mcr.microsoft.com/devcontainers/cpp:1-ubuntu-22.04",
+
+    // Add features to the base image.
+    "features": {
+        // Add Python for scripting and automation
+        "ghcr.io/devcontainers/features/python:1": {
+            "version": "3.10"
+        }
+    },
+
+    // Forward a port if you run a web server, not needed now but good to have
+    "forwardPorts": [],
+
+    // Use 'postCreateCommand' to run commands after the container is created.
+    "postCreateCommand": "sudo apt-get update && sudo apt-get install -y ninja-build",
+
+    // Configure VS Code settings and extensions
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-vscode.cpptools-extension-pack",
+                "ms-vscode.cmake-tools",
+                "ms-python.python",
+                "cheshirekow.cmake-format"
+            ]
+        }
+    },
+
+    // Run as the non-root 'vscode' user.
+    "remoteUser": "vscode"
+}
