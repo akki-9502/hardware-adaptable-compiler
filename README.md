@@ -1,41 +1,66 @@
-# Project: Build Hardware Adaptable Model Representations and Compilers
+# Hardware-Adaptive Vision Model Compiler
 
-## 0. Overview
+This project is a web-based tool for compiling and benchmarking deep learning models for various hardware targets. It allows you to load pre-trained vision models, export them to ONNX, and then compile and benchmark them on different hardware profiles like CPUs and NVIDIA GPUs.
 
-The proliferation of specialized hardware accelerators (GPUs, TPUs, FPGAs, ASICs) for machine learning has created a fragmented ecosystem. Deploying a single ML model across this diverse hardware landscape is a significant challenge, often requiring manual, hardware-specific optimizations that are time-consuming and not portable.
+## Features
 
-This project aims to address this "model deployment problem" by developing **hardware-adaptable model representations and compilers**. The core idea is to create a unified framework where a high-level model can be automatically and efficiently compiled to run on a wide variety of hardware targets. This will enable performance portability, allowing developers to design models without being constrained by the specifics of the underlying hardware, and to deploy them seamlessly on the best-suited processor.
+- **Web-Based UI**: A Flask server provides an easy-to-use interface for all operations.
+- **Model Loading**: Load popular computer vision models from `torchvision` (e.g., MobileNetV2, ResNet, EfficientNet).
+- **ONNX Export**: Export PyTorch models to the standard ONNX format.
+- **Hardware-Adaptive Compilation**: Compile models for different hardware profiles using ONNX Runtime.
+- **Performance Benchmarking**: Measure key performance metrics like latency, throughput, and percentile latencies for each hardware target.
+- **System Information**: Automatically detects available hardware (CPU, CUDA-enabled GPU).
 
-## 1. Key Areas
+## Project Structure
 
-### 1.1. Model Intermediate Representation (IR)
+- `app.py`: The main Flask application that serves the web interface and handles API requests.
+- `model_handler.py`: A class responsible for loading `torchvision` models and exporting them to ONNX.
+- `hardware_profiles.py`: Defines the different hardware targets (e.g., CPU, NVIDIA GPU) and provides system information.
+- `compiler.py`: The core class that takes an ONNX model and a hardware profile, then compiles and benchmarks it using ONNX Runtime.
+- `requirements.txt`: A list of all Python dependencies for the project.
+- `templates/index.html`: (Assumed) The HTML file for the web interface.
 
-We will design or extend a flexible Intermediate Representation (IR) for machine learning models. This IR will serve as a "lingua franca" between high-level model descriptions and low-level hardware code.
+## Setup and Installation
 
-*   **Multi-Level Abstraction**: The IR must be capable of representing computations at multiple levels, from high-level neural network operators (e.g., convolution, attention) down to low-level, hardware-agnostic linear algebra and memory operations.
-*   **Extensibility**: The IR should be easily extensible to support new, innovative model architectures and hardware primitives.
-*   **Hardware-Agnosticism**: The core representation will be hardware-agnostic, with mechanisms to progressively lower and incorporate hardware-specific information during the compilation process.
+1.  **Clone the Repository** (or ensure you have the project files in a directory).
 
-### 1.2. Hardware-Adaptable Compiler
+2.  **Create a Python Virtual Environment**:
+    ```bash
+    python -m venv .venv
+    ```
 
-The compiler is the central component that translates the IR into high-performance, executable code for a specific hardware backend.
+3.  **Activate the Virtual Environment**:
+    -   **Windows**:
+        ```powershell
+        .\.venv\Scripts\Activate.ps1
+        ```
+    -   **macOS/Linux**:
+        ```bash
+        source .venv/bin/activate
+        ```
 
-*   **Modular Backend Design**: The compiler will feature a modular architecture, allowing new hardware backends to be plugged in with minimal effort.
-*   **Automated Optimization**: We will implement a suite of automated optimization techniques, including operator fusion, memory layout optimization, parallelization, and target-aware instruction scheduling.
-*   **Search-Based Tuning**: To achieve optimal performance, the compiler will incorporate auto-tuning mechanisms (e.g., search-based scheduling) to explore the vast optimization space and discover the best configuration for a given model and hardware target.
+4.  **Install Dependencies**:
+    Install all the required packages using the `requirements.txt` file.
+    ```bash
+    pip install -r requirements.txt
+    ```
+    *Note*: If you have a CUDA-enabled GPU, you may need to install a specific build of PyTorch. Refer to the [official PyTorch website](https://pytorch.org/get-started/locally/) for the correct command.
 
-## 2. Goals and Objectives
+## How to Run
 
-*   **Define a Flexible IR**: To design and implement an extensible, multi-level IR for representing modern ML models.
-*   **Develop a Modular Compiler**: To build a compiler framework that can be easily extended to support new hardware backends (e.g., CPUs, GPUs, and custom accelerators).
-*   **Achieve Performance Portability**: To demonstrate that models compiled through our framework achieve high performance across a diverse set of hardware targets without manual tuning for each one.
-*   **Simplify ML Deployment**: To create a streamlined workflow that simplifies the path from model training to efficient inference deployment on heterogeneous hardware.
+1.  **Start the Flask Server**:
+    Run the `app.py` script from your terminal:
+    ```bash
+    python app.py
+    ```
 
-## 3. Potential Technologies
+2.  **Open the Web Interface**:
+    Open your web browser and navigate to:
+    [http://localhost:5000](http://localhost:5000)
 
-This project will draw inspiration from and potentially build upon state-of-the-art technologies in the compiler and ML systems space, including:
-
-*   **MLIR (Multi-Level Intermediate Representation)**: A powerful and extensible compiler infrastructure from the LLVM project, designed specifically for this type of problem.
-*   **Apache TVM**: A leading open-source, end-to-end deep learning compiler stack that provides a reference for many of the concepts in this project.
-*   **LLVM**: The foundational compiler backend for generating optimized machine code for CPUs and GPUs.
-*   **ONNX (Open Neural Network Exchange)**: As a potential high-level input format for models.
+3.  **Using the Application**:
+    -   The web page will show your current system hardware.
+    -   Select a model from the dropdown and click "Load Model". This will download the model and convert it to ONNX.
+    -   Once the model is loaded, you can choose a hardware profile and click "Compile" to benchmark it.
+    -   Alternatively, click "Compile for All Available Profiles" to run benchmarks on all compatible hardware on your system.
+    -   The results of each benchmark will be displayed on the page.

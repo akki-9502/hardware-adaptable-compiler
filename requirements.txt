@@ -1,0 +1,8 @@
+flask
+torch
+torchvision
+onnx
+onnxruntime
+numpy
+--find-links https://mlc.ai/wheels
+mlc-ai-nightly
