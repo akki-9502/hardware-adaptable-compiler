@@ -1,7 +1,16 @@
 import torch
 
 class HardwareProfile:
-    """Hardware profile definitions"""
+    """Hardware profile definitions
+    
+    This class defines 4 different hardware profiles for model compilation:
+    1. nvidia_gpu - NVIDIA GTX 1650 GPU (FP32, CUDA)
+    2. cpu_x86 - Intel/AMD CPU (FP32)
+    3. edge_int8 - Edge Device with quantization (INT8)
+    4. jetson_nano - NVIDIA Jetson Nano (FP16, CUDA)
+    
+    The system automatically detects available hardware and enables compatible profiles.
+    """
     
     PROFILES = {
         'nvidia_gpu': {
