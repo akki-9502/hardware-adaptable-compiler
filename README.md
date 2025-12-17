@@ -1,6 +1,6 @@
 # Hardware-Adaptive Vision Model Compiler
 
-This project is a comprehensive web-based tool for compiling and benchmarking deep learning models across **heterogeneous hardware platforms**. It supports **15 different hardware profiles** and **95+ computer vision models**, allowing you to optimize and benchmark models for CPUs, GPUs, Edge devices, and FPGAs.
+This project is a comprehensive web-based tool for compiling and benchmarking deep learning models across **heterogeneous hardware platforms**. It supports **15 different hardware profiles** and **64+ computer vision models**, allowing you to optimize and benchmark models for CPUs, GPUs, Edge devices, and FPGAs.
 
 ## Supported Hardware
 
@@ -32,7 +32,7 @@ This project supports **15 different hardware profiles** covering a wide range o
 
 ## Supported Models
 
-This project includes **95+ pre-trained computer vision models** organized into 8 categories:
+This project includes **64+ pre-trained computer vision models** organized into 8 categories:
 
 - **Lightweight Models (9)**: MobileNet v2/v3, SqueezeNet, ShuffleNet, MNASNet - optimized for mobile and edge devices
 - **ResNet Family (9)**: ResNet18/34/50/101/152, Wide ResNet, ResNeXt - classic CNN architectures
@@ -46,7 +46,7 @@ This project includes **95+ pre-trained computer vision models** organized into 
 ## Features
 
 - **Heterogeneous Hardware Support**: Compile and benchmark models on 15 different hardware platforms (GPUs, CPUs, Edge devices, FPGAs)
-- **Extensive Model Library**: Access to 95+ pre-trained computer vision models from torchvision
+- **Extensive Model Library**: Access to 64+ pre-trained computer vision models from torchvision
 - **Web-Based UI**: A Flask server provides an easy-to-use interface for all operations
 - **ONNX Export**: Export PyTorch models to the standard ONNX format for cross-platform compatibility
 - **Hardware-Adaptive Compilation**: Automatically optimize models for different hardware using ONNX Runtime
@@ -67,12 +67,12 @@ This project includes **95+ pre-trained computer vision models** organized into 
 | Modern Architectures | 13 | ConvNeXt, RegNet, MaxViT | Latest research, Production |
 | Classic Models | 3 | AlexNet, GoogLeNet, Inception | Educational, Baseline |
 
-**Total: 95+ models** - All models are pre-trained on ImageNet and ready for inference or fine-tuning.
+**Total: 64+ models** - All models are pre-trained on ImageNet and ready for inference or fine-tuning.
 
 ## Project Structure
 
 - `app.py`: The main Flask application that serves the web interface and handles API requests
-- `model_handler.py`: Manages 95+ vision models with category organization and ONNX export capabilities
+- `model_handler.py`: Manages 64+ vision models with category organization and ONNX export capabilities
 - `hardware_profiles.py`: Defines 15 heterogeneous hardware profiles with automatic detection and categorization
 - `compiler.py`: Core compilation engine that optimizes models for specific hardware using ONNX Runtime
 - `requirements.txt`: Python dependencies for the project

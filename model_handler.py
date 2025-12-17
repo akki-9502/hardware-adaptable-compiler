@@ -6,11 +6,15 @@ from pathlib import Path
 class VisionModelHandler:
     """Handles loading and exporting vision models
     
-    Supports a comprehensive collection of computer vision models organized by category:
-    - Classification: ResNet, MobileNet, EfficientNet, VGG, DenseNet, SqueezeNet, Inception, ViT
-    - Object Detection: Faster R-CNN, RetinaNet, SSD, FCOS
-    - Segmentation: FCN, DeepLabV3, LRASPP
-    - Keypoint Detection: Keypoin R-CNN
+    Supports 64+ computer vision classification models organized by category:
+    - Lightweight Models: MobileNet, SqueezeNet, ShuffleNet, MNASNet
+    - ResNet Family: ResNet, Wide ResNet, ResNeXt
+    - EfficientNet Family: EfficientNet B0-B7, EfficientNet V2
+    - VGG Models: VGG11/13/16/19 with/without BatchNorm
+    - DenseNet Models: DenseNet121/161/169/201
+    - Vision Transformers: ViT, Swin Transformer
+    - Modern Architectures: ConvNeXt, RegNet, MaxViT
+    - Classic Models: AlexNet, GoogLeNet, Inception
     """
     
     AVAILABLE_MODELS = {
