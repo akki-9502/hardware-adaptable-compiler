@@ -24,6 +24,8 @@ def get_system_info():
     try:
         system_info = HardwareProfile.get_system_info()
         available_profiles = HardwareProfile.get_available_profiles()
+        profiles_by_category = HardwareProfile.get_profiles_by_category()
+        total_profiles = HardwareProfile.get_total_profiles()
         
         profiles_info = {}
         for profile_id in available_profiles:
@@ -32,7 +34,9 @@ def get_system_info():
         return jsonify({
             'status': 'success',
             'system': system_info,
-            'available_profiles': profiles_info
+            'available_profiles': profiles_info,
+            'profiles_by_category': profiles_by_category,
+            'total_profiles': total_profiles
         })
     except Exception as e:
         return jsonify({'status': 'error', 'message': str(e)}), 500
@@ -42,9 +46,14 @@ def get_available_models():
     """Get list of available models"""
     try:
         models = list(VisionModelHandler.AVAILABLE_MODELS.keys())
+        categories = VisionModelHandler.get_models_by_category()
+        total = VisionModelHandler.get_total_models()
+        
         return jsonify({
             'status': 'success',
-            'models': models
+            'models': models,
+            'categories': categories,
+            'total_models': total
         })
     except Exception as e:
         return jsonify({'status': 'error', 'message': str(e)}), 500
